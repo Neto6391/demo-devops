@@ -1,11 +1,11 @@
 version: "3.8"
 
 services:
-  web:
+  web-auth-service:
     image: nginx:latest
     container_name: auth-web-service
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/auth-service/default.conf:/etc/nginx/conf.d/default.conf
       - ./auth-service:/var/www/html/auth-service:rw
     ports:
       - "5001:80"
