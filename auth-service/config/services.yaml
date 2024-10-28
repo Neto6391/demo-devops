@@ -22,5 +22,31 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Service\AuthService:
+        arguments:
+            $documentManager: '@doctrine_mongodb.odm.document_manager'
+            $passwordHasher: '@security.password_hasher'
+
+    App\Controller\AuthController:
+        arguments:
+            $documentManager: '@doctrine_mongodb.odm.document_manager'
+            $passwordHasher: '@security.password_hasher'
+            $jwtManager: '@lexik_jwt_authentication.jwt_manager'
+            $blacklistService: '@App\Service\BlacklistService'
+            $authService: '@App\Service\AuthService'
+            $jwtEncoder: '@lexik_jwt_authentication.encoder'
+
+    App\Service\BlacklistService:
+        arguments:
+            $dm: '@doctrine_mongodb.odm.document_manager'
+            $cache: '@cache.app'
+
+    App\EventListener\TokenValidationListener:
+        arguments:
+            $blacklistService: '@App\Service\BlacklistService'
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_decoded, method: onJWTDecoded }
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_not_found, method: onJWTNotFound }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -8,13 +8,17 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/mongodb-odm-bundle": "^5.0",
+        "lexik/jwt-authentication-bundle": "^3.1",
+        "predis/predis": "^2.2",
         "symfony/console": "7.1.*",
         "symfony/debug": "^4.4",
         "symfony/debug-bundle": "^7.1",
         "symfony/dotenv": "7.1.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "7.1.*",
+        "symfony/password-hasher": "7.1.*",
         "symfony/runtime": "7.1.*",
+        "symfony/validator": "7.1.*",
         "symfony/yaml": "7.1.*"
     },
     "config": {
