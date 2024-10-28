@@ -26,13 +26,6 @@ COPY . .
 # Instalar dependências do Composer
 RUN composer install --no-scripts --prefer-dist --no-interaction --no-plugins
 
-# Configurar permissões
-RUN chown -R www-data:www-data . \
-    && chmod -R 755 . \
-    && mkdir -p var/cache/dev var/log var/sessions \
-    && chown -R www-data:www-data var \
-    && chmod -R 775 var/cache/dev var/log var/sessions
-
 # Configurar PHP-FPM
 COPY docker/www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY docker/php.ini /usr/local/etc/php/php.ini
